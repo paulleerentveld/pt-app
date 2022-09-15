@@ -8,11 +8,13 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts/1 or /workouts/1.json
   def show
+
   end
 
   # GET /workouts/new
   def new
     @workout = Workout.new
+    @exercises = Exercise.all
   end
 
   # GET /workouts/1/edit
@@ -65,6 +67,6 @@ class WorkoutsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workout_params
-      params.require(:workout).permit(:type, :status)
+      params.require(:workout).permit(:workouttype, :status, exercise_ids:[])
     end
 end

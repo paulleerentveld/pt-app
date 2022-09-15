@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_14_024505) do
+ActiveRecord::Schema.define(version: 2022_09_15_043133) do
+
+  create_table "client_workouts", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "workout_id"
+    t.date "workoutdate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_client_workouts_on_client_id"
+    t.index ["workout_id"], name: "index_client_workouts_on_workout_id"
+  end
 
   create_table "clients", force: :cascade do |t|
     t.string "firstname"
@@ -29,9 +39,13 @@ ActiveRecord::Schema.define(version: 2022_09_14_024505) do
     t.index ["mobile"], name: "index_clients_on_mobile", unique: true
   end
 
-  create_table "clients_workouts", id: false, force: :cascade do |t|
-    t.integer "workout_id", null: false
-    t.integer "client_id", null: false
+  create_table "exercise_workouts", force: :cascade do |t|
+    t.integer "exercise_id"
+    t.integer "workout_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exercise_id"], name: "index_exercise_workouts_on_exercise_id"
+    t.index ["workout_id"], name: "index_exercise_workouts_on_workout_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -42,11 +56,6 @@ ActiveRecord::Schema.define(version: 2022_09_14_024505) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_exercises_on_name", unique: true
-  end
-
-  create_table "exercises_workouts", id: false, force: :cascade do |t|
-    t.integer "exercise_id", null: false
-    t.integer "workout_id", null: false
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -61,7 +70,7 @@ ActiveRecord::Schema.define(version: 2022_09_14_024505) do
   end
 
   create_table "workouts", force: :cascade do |t|
-    t.string "type"
+    t.string "workouttype"
     t.boolean "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

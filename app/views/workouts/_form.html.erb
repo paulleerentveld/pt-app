@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :type %>
-    <%= form.text_field :type %>
+    <%= form.label :workouttype %>
+    <%= form.text_field :workouttype %>
   </div>
 
   <div class="field">
@@ -21,7 +21,17 @@
     <%= form.check_box :status %>
   </div>
 
+  <div class="field">
+    <%= form.label :exercises %>
+    <%= form.collection_check_boxes :exercise_ids, Exercise.all, :id, :name %>
+  </div>
+
+
+
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+
+
